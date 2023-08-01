@@ -17,18 +17,15 @@ import com.sevenmart.pages.LoginPage;
 public class AdminUsersTest extends Base {
 
 	LoginPage loginpage;
+    AdminUsersPage adminuserspage;
 
-	AdminUsersPage adminuserspage;
-
-	@Test
-
+	@Test(priority = 1)
 	public void Verify_HitAdminUser() {
 
 		loginpage = new LoginPage(driver);
 		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.hitAdminUsers();
-		
 
 	}
 
@@ -42,9 +39,9 @@ public class AdminUsersTest extends Base {
 		adminuserspage.enterUserName(username);
 		adminuserspage.enterPassword(password);
 		adminuserspage.selectAdminUsers();
-	
-		
+
 	}
+
 	@Test(dataProvider = "StaffUsers", dataProviderClass = AdminUsersDataProvider.class)
 	public void Verify_AddNewStaffUsers(String username, String password) {
 		loginpage = new LoginPage(driver);
@@ -55,9 +52,9 @@ public class AdminUsersTest extends Base {
 		adminuserspage.enterUserName(username);
 		adminuserspage.enterPassword(password);
 		adminuserspage.selectStaffUsers();
-		
-		
+
 	}
+
 	@Test(dataProvider = "PartnerUsers", dataProviderClass = AdminUsersDataProvider.class)
 	public void Verify_AddNewPartnerUsers(String username, String password) {
 		loginpage = new LoginPage(driver);
@@ -68,9 +65,9 @@ public class AdminUsersTest extends Base {
 		adminuserspage.enterUserName(username);
 		adminuserspage.enterPassword(password);
 		adminuserspage.selectPartnerUsers();
-	
-		
+
 	}
+
 	@Test(dataProvider = "DeliveryBoyUsers", dataProviderClass = AdminUsersDataProvider.class)
 	public void Verify_AddNewDeliveryBoyUsers(String username, String password) {
 		loginpage = new LoginPage(driver);
@@ -81,9 +78,9 @@ public class AdminUsersTest extends Base {
 		adminuserspage.enterUserName(username);
 		adminuserspage.enterPassword(password);
 		adminuserspage.selectDeliveryBoyUsers();
-		
-		
+
 	}
+
 	@Test
 	public void Verify_DeleteAdminUser() {
 		loginpage = new LoginPage(driver);
@@ -91,7 +88,6 @@ public class AdminUsersTest extends Base {
 		loginpage.login();
 		adminuserspage.hitAdminUsers();
 		adminuserspage.deleteUser("Shashi");
-		
-		
+
 	}
 }
