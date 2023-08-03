@@ -11,7 +11,7 @@ public class HomePage {
 	WebDriver driver;
 	GeneralUtility generalutility;
 
-	@FindBy(xpath = "//a[@class='d-block']")
+	@FindBy(xpath = "//li[@class='breadcrumb-item active']")
 	private WebElement profileName;
 
 	public HomePage(WebDriver driver) {

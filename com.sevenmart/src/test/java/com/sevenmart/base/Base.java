@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import com.sevenmart.constants.Constants;
 import com.sevenmart.utilities.ScreenShotUtility;
@@ -23,7 +24,7 @@ public class Base {
 	public WebDriver driver;
 	Properties properties = new Properties();
 	FileInputStream fileinputstream;
-	ScreenShotUtility screenShotUtility=new ScreenShotUtility();
+	ScreenShotUtility screenShotUtility = new ScreenShotUtility();
 
 	public Base() {
 		try {
@@ -55,7 +56,14 @@ public class Base {
 		driver.manage().deleteAllCookies();
 	}
 
-	@BeforeMethod
+	@Parameters("browser")
+	@BeforeMethod(enabled = false)
+	public void launchBrowser(String browser) {
+        String url = properties.getProperty("url");
+        initialize(browser, url);
+	}
+
+	@BeforeMethod(enabled = true,alwaysRun = true)
 	public void launchBrowser() {
 
 		String url = properties.getProperty("url");
@@ -64,9 +72,9 @@ public class Base {
 	}
 	@AfterMethod
 	public void closeBrowser(ITestResult itestresult) {
-		
-		if(itestresult.getStatus()==ITestResult.FAILURE) {
-			screenShotUtility.takeScreenShot(driver,itestresult.getName());
+
+		if (itestresult.getStatus() == ITestResult.FAILURE) {
+			screenShotUtility.takeScreenShot(driver, itestresult.getName());
 		}
 	}
 }

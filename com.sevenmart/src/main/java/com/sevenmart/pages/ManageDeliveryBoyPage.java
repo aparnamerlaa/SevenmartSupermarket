@@ -1,5 +1,6 @@
 package com.sevenmart.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -7,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
 import com.sevenmart.utilities.GeneralUtility;
 import com.sevenmart.utilities.PageUtility;
 import com.sevenmart.utilities.WaitUtility;
@@ -54,89 +57,67 @@ public class ManageDeliveryBoyPage {
 	private WebElement existingEmail;
 	@FindBy(xpath = "//tbody//tr//td/span[@id='res']")
 	private WebElement nonexistingEmail;
-
-	@FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = "//button[@type='submit']")
 	private WebElement resetButton;
-	@FindBy(xpath="//table/tbody/tr/td[1]")
-	private List<WebElement> userNames;
+	@FindBy(xpath="//table/tbody/tr/td[1]")//table locate for username
+	private List<WebElement> userNamesFromTable;
 
 	public ManageDeliveryBoyPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-
 	}
-
-	public void hit_ManageDeliveryBoyLink() {
-
+   public void hit_ManageDeliveryBoyLink() {
 		manageDeliveryBoy.click();
 	}
-
 	public String Validate_DeliveryBoyPage() {
 		generalutility = new GeneralUtility(driver);
-
-		return generalutility.gettextofelement(deliveryBoyPageConfirmelement);
+        return generalutility.gettextofelement(deliveryBoyPageConfirmelement);
 	}
-
-	public void clickOn_CreateNewButton() {
+   public void clickOn_CreateNewButton() {
 		clickNew.click();
 	}
-
-	public void enterName_DeliveryBoy(String name) {
+   public void enterName_DeliveryBoy(String name) {
 		nameField.sendKeys(name);
 	}
-
-	public void enterEmail_DeliveryBoy(String email) {
+   public void enterEmail_DeliveryBoy(String email) {
 		emailField.sendKeys(email);
 	}
-
 	public void enterPhonenumber_DeliveryBoy(String number) {
 		phoneNumber.sendKeys(number);
 	}
-
 	public void enterAddress_DeliveryBoy(String addressdetails) {
 		address.sendKeys(addressdetails);
-
 	}
-
 	public void enterUserName_DeliveryBoy(String userNamedetails) {
 		userName.sendKeys(userNamedetails);
-
 	}
-
-	public void enterPassword_DeliveryBoy(String passwordDetails) {
+  public void enterPassword_DeliveryBoy(String passwordDetails) {
 		password.sendKeys(passwordDetails);
 	}
-//
-//	public void scrollTo_ClickSaveButton() {
-//		pageUtility = new PageUtility(driver);
-//		pageUtility.javaScriptExecutorScrollToElement(saveButton);
-//	}
-//	public void scrollAndClick() {
-//		pageUtility = new PageUtility(driver);
-//		pageUtility.scrollAndClick(saveButton);
-//	}
-
-//	public void clickOnSaveButton_DeliveryBoy() {
-//		pageUtility = new PageUtility(driver);
-//		pageUtility.javaScriptScrollandclick(saveButton);
-//	}
 	public void clickOnSaveButton_DeliveryBoy() {
 		saveButton.submit();
 	}
-//
-//	public String alertMessage() {
-//		generalutility = new GeneralUtility(driver);
-//
-//		return generalutility.gettextofelement(alertMessage);
-//
-//	}
-//
-//	public String alertMessageOfUsernameAlreadyExist() {
-//		generalutility = new GeneralUtility(driver);
-//
-//		return generalutility.gettextofelement(alertMessageOfsameUsername);
-//
-//	}
+
+	
+	
+	public String searchNewlyAddedDeliveryBoyInTableByUserName(String expectedUserName) {
+		for(WebElement iter:userNamesFromTable) {
+			ArrayList<String> userNameValues=new ArrayList<String>();
+			String actualUsername=iter.getText();
+			userNameValues.add(actualUsername);
+			if(actualUsername.contains(expectedUserName)) {
+				System.out.println("The searched user is found");
+			}
+			}
+		return expectedUserName;
+	}
+
+	public String alertMessageOfUsernameAlreadyExist() {
+		generalutility = new GeneralUtility(driver);
+
+		return generalutility.gettextofelement(alertMessageOfsameUsername);
+
+	}
 
 	public void clickOnSearchButton() {
 		searchButton.click();
@@ -145,31 +126,63 @@ public class ManageDeliveryBoyPage {
 	public void NameOfExistingDeliveryBoy(String nameOfexistingDeliveryBoy) {
 		searchWithName.sendKeys(nameOfexistingDeliveryBoy);
 	}
-
-	public void EmailOfExistingDeliveryBoy(String emailOfexistingDeliveryBoy) {
+    public void EmailOfExistingDeliveryBoy(String emailOfexistingDeliveryBoy) {
 		searcheWithEmail.sendKeys(emailOfexistingDeliveryBoy);
-
 	}
-
-	public void searchForExistingDetails() {
+    public void searchForExistingDetails() {
 		tableSearchButton.click();
 	}
 
 	public String getEmailofExistingDeliveryboy() {
 		generalutility = new GeneralUtility(driver);
-
-		return generalutility.gettextofelement(existingEmail);
-
+        return generalutility.gettextofelement(existingEmail);
 	}
 	public String GetAlertofNonExistingDeliveryboy() 
 	{
 		generalutility = new GeneralUtility(driver);
-
-		return generalutility.gettextofelement(nonexistingEmail);
+        return generalutility.gettextofelement(nonexistingEmail);
 
 	}
+	public void hitOnManageDeliveryboy() {
+		loginpage = new LoginPage(driver);
+		loginpage.login();
+        hit_ManageDeliveryBoyLink();	
+	}
 	
+	public void AlreadyExistingUsername(String name, String email, String number, String address,
+			String username, String password) {
+        loginpage = new LoginPage(driver);
+	    loginpage.login();
+		hit_ManageDeliveryBoyLink();
+		clickOn_CreateNewButton();
+		enterName_DeliveryBoy(name);
+		enterEmail_DeliveryBoy(email);
+		enterPhonenumber_DeliveryBoy(number);
+		enterAddress_DeliveryBoy(address);
+		enterUserName_DeliveryBoy(username);
+		enterPassword_DeliveryBoy(password);
 		
+	}
+	public void SearchForAlreadyExistingDeliveryBoy(String name, String email) {
+        loginpage = new LoginPage(driver);
+	    loginpage.login();
+		hit_ManageDeliveryBoyLink();
+		clickOnSearchButton();
+		NameOfExistingDeliveryBoy(name);
+		EmailOfExistingDeliveryBoy(email);
+		searchForExistingDetails();		
+	}
+	public void ResultforNonExistingDeliveryBoy(String email) {
+		loginpage = new LoginPage(driver);
+		loginpage.login();
+	    hit_ManageDeliveryBoyLink();
+		clickOnSearchButton();
+		EmailOfExistingDeliveryBoy(email);
+		searchForExistingDetails();		
+	}	
+	public void confirmNewlyAddedDeliveryboyDetails() {
 		
+	}
+	
 	}
 	

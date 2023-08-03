@@ -28,7 +28,6 @@ public class AdminUsersPage {
 	WebElement adminuserspage;
 	@FindBy(xpath = "//a[@onclick='click_button(1)']")
 	WebElement clickOnNewButton;
-
 	@FindBy(xpath = "//input[@id='username']")
 	WebElement username_AdminUsers;
 	@FindBy(xpath = "//input[@id='password']")
@@ -37,11 +36,8 @@ public class AdminUsersPage {
 	WebElement selectUserType;
 	@FindBy(xpath = "//button[@type='submit' and @name='Create']")
 	WebElement saveButton;
-	
-
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
 	private List<WebElement> userNames;
-	
 
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
@@ -79,48 +75,54 @@ public class AdminUsersPage {
 
 	public void selectAdminUsers() {
 		PageUtility pageUtility = new PageUtility(driver);
-		pageUtility.select_ByVisibleText(selectUserType, "Admin");
-		saveButton.submit();
+		pageUtility.select_ByVisibleText( adminUsers, "Admin");
+		clickSaveButton();
 	}
 
 	public void selectPartnerUsers() {
 		PageUtility pageUtility = new PageUtility(driver);
 		pageUtility.select_ByVisibleText(selectUserType, "Partner");
-		saveButton.submit();
+		saveButton.click();
 	}
 
 	public void selectDeliveryBoyUsers() {
 		PageUtility pageUtility = new PageUtility(driver);
 		pageUtility.select_ByVisibleText(selectUserType, "Delivery Boy");
-		saveButton.submit();
+		saveButton.click();
 	}
 
-//	public void clickSaveButton() {
-//		saveButton.click();
-//	}
-//
+   public void clickSaveButton() {
+	saveButton.click();
+}
 
-	
+	public void AddNewAdminUsers(String username, String password) {
+		LoginPage loginpage = new LoginPage(driver);
+		loginpage.login();
+		hitAdminUsers();
+		clickOnNewButton();
+		enterUserName(username);
+		enterPassword(password);
+		selectAdminUsers();
+
+	}
 
 	public void deleteUser(String personName) {
 		GeneralUtility generalUtility = new GeneralUtility(driver);
 		PageUtility pageUtility = new PageUtility(driver);
 
 		List<String> names = new ArrayList<String>();
-		
-		
+
 		names = generalUtility.gettextofelements(userNames);
-		for (pos = 0; pos<names.size(); pos++) {
+		for (pos = 0; pos < names.size(); pos++) {
 			if (personName.equals(names.get(pos))) {
 				pos++;
 				break;
 			}
 			System.out.println(pos);
 		}
-			
-			WebElement deleteButton = driver.findElement(By.xpath("//table/tbody/tr["+pos+"]/td[5]/a[3]"));
-			pageUtility.scrollAndClick(deleteButton);
-		
+
+		WebElement deleteButton = driver.findElement(By.xpath("//table/tbody/tr[" + pos + "]/td[5]/a[3]"));
+		pageUtility.scrollAndClick(deleteButton);
 
 	}
 

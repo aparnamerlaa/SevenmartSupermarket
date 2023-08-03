@@ -16,26 +16,24 @@ public class ManageDeliveryBoyTest extends Base {
 	ManageDeliveryBoyPage manageDeliveryBoy;
 	LoginPage loginPage;
 	PageUtility pageUtility;
-
+//pass
 	@Test
 	public void verify_ManageDeliveryboy() {
-		loginPage = new LoginPage(driver);
-		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
-		loginPage.login();
-
-		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
+		manageDeliveryBoy=new ManageDeliveryBoyPage(driver);
+		manageDeliveryBoy.hitOnManageDeliveryboy();
 		String actualtext = manageDeliveryBoy.Validate_DeliveryBoyPage();
 		String expectedtext = "List Delivery Boy";
-		Assert.assertEquals(actualtext, expectedtext);
+		Assert.assertEquals(actualtext, expectedtext,"Manage DeliveryBoy page not selected");
 
 	}
-
-	@Test(dataProvider = "deliveryBoyProfileDetailsExcel", dataProviderClass = DeliveryBoyDataProvider.class)
+//pass
+	@Test(dataProvider = "DeliveryBoyDetails", dataProviderClass =  DeliveryBoyDataProvider.class)
 	public void Verify_CreateNewDeliveryBoyDetails(String name, String email, String number, String address,
 			String username, String password) {
+		
 		loginPage = new LoginPage(driver);
-		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
 		loginPage.login();
+		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
 		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
 		manageDeliveryBoy.clickOn_CreateNewButton();
 		manageDeliveryBoy.enterName_DeliveryBoy(name);
@@ -44,29 +42,21 @@ public class ManageDeliveryBoyTest extends Base {
 		manageDeliveryBoy.enterAddress_DeliveryBoy(address);
 		manageDeliveryBoy.enterUserName_DeliveryBoy(username + GeneralUtility.getRandomName());
 		manageDeliveryBoy.enterPassword_DeliveryBoy(password);
-	
 		manageDeliveryBoy.clickOnSaveButton_DeliveryBoy();
-
+		String actualresult=manageDeliveryBoy.searchNewlyAddedDeliveryBoyInTableByUserName(username);
+		String expectedresult="	ApaRajshGreta";
+		Assert.assertEquals(actualresult,expectedresult,"Result not found");
 	}
 
-	@Test(dataProvider = "ExistingDeliveryBoyDetails", dataProviderClass = DeliveryBoyDataProvider.class)
+	@Test(dataProvider = "deliveryBoyProfileDetailsExcelnonexisting", dataProviderClass = DeliveryBoyDataProvider.class)
 	public void Verify_AlreadyExistingUsername(String name, String email, String number, String address,
 			String username, String password) {
 
 		loginPage = new LoginPage(driver);
 		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
 		loginPage.login();
-		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
-		manageDeliveryBoy.clickOn_CreateNewButton();
-		manageDeliveryBoy.enterName_DeliveryBoy(name);
-		manageDeliveryBoy.enterEmail_DeliveryBoy(email);
-		manageDeliveryBoy.enterPhonenumber_DeliveryBoy(number);
-		manageDeliveryBoy.enterAddress_DeliveryBoy(address);
-		manageDeliveryBoy.enterUserName_DeliveryBoy(username);
-		manageDeliveryBoy.enterPassword_DeliveryBoy(password);
+		manageDeliveryBoy.AlreadyExistingUsername(name, email, number, address, username, password);
 		manageDeliveryBoy.clickOnSaveButton_DeliveryBoy();
-
-	
 	}
 
 	@Test(dataProvider = "SearchExistingDeliveryBoyDetails", dataProviderClass = DeliveryBoyDataProvider.class)
@@ -77,10 +67,7 @@ public class ManageDeliveryBoyTest extends Base {
 		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
 		loginPage.login();
 		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
-		manageDeliveryBoy.clickOnSearchButton();
-		manageDeliveryBoy.NameOfExistingDeliveryBoy(name);
-		manageDeliveryBoy.EmailOfExistingDeliveryBoy(email);
-		manageDeliveryBoy.searchForExistingDetails();
+		manageDeliveryBoy.SearchForAlreadyExistingDeliveryBoy(name, email);
 		String actualText = manageDeliveryBoy.getEmailofExistingDeliveryboy();
 		String expectedText = email;
 		Assert.assertEquals(actualText, expectedText);
@@ -94,13 +81,8 @@ public class ManageDeliveryBoyTest extends Base {
 		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
 		loginPage.login();
 		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
-		manageDeliveryBoy.clickOnSearchButton();
-		manageDeliveryBoy.EmailOfExistingDeliveryBoy(email);
-		manageDeliveryBoy.searchForExistingDetails();
-		String actualText = manageDeliveryBoy.GetAlertofNonExistingDeliveryboy();
-		String expectedText = ".........RESULT NOT FOUND.......";
-		Assert.assertEquals(actualText, expectedText);
-
+		manageDeliveryBoy.ResultforNonExistingDeliveryBoy(email);
+		
 	}
 
 }

@@ -16,14 +16,14 @@ public class LoginTest extends Base {
 	HomePage homepage;
 	ExcelUtility excelutility = new ExcelUtility();
 
-	@Test(priority = 2)
+	@Test(priority = 2, groups = "smoke")
 	public void verify_AdminUserLogin() {
 		loginpage = new LoginPage(driver);
 		homepage = new HomePage(driver);
 		loginpage.login();
 		String actualProfileName = homepage.getProfileName();
-		String expectedProfileName = "admin";
-		Assert.assertEquals(actualProfileName, expectedProfileName,"Not valid userlogin");
+		String expectedProfileName = "Dashboard";
+		Assert.assertEquals(actualProfileName, expectedProfileName, "Not valid userlogin");
 	}
 
 	@Test
@@ -33,19 +33,17 @@ public class LoginTest extends Base {
 		String inValidUserName = excelutility.getCellData(0, 0);
 		String invalidPassword = excelutility.getCellData(0, 1);
 		loginpage.login(inValidUserName, invalidPassword);
-	    String actualErrorMessage = loginpage.getErrorMessage();
+		String actualErrorMessage = loginpage.getErrorMessage();
 		String expectedErrorMessage = "Alert!";
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
+		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Invalid user");
 	}
-	
 
-//test data must be from test only
-	@Test(dataProvider = "InvalidCredentials", dataProviderClass = TestDataProviders.class)
+	@Test(dataProvider = "invalidlogin", dataProviderClass = TestDataProviders.class)
 	public void verify_InvalidUserLogin1(String userName, String password) {
 		loginpage = new LoginPage(driver);
-        loginpage.login(userName, password);
-        String actualErrorMessage = loginpage.getErrorMessage();
-		String expectedErrorMessage = "Invalid Username/Password";
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
+		loginpage.login(userName, password);
+		String actualErrorMessage = loginpage.getErrorMessage();
+		String expectedErrorMessage = "Alert!";
+		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Invalid username and Password");
 	}
 }

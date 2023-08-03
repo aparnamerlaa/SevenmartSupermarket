@@ -29,13 +29,13 @@ public class DeliveryBoyDataProvider {
 
 	@DataProvider(name = "deliveryBoyProfileDetailsExcel")
 	    public Object[][] deliveryBoyProfileDetails() {
-		excelutility.setExcelFile("Deliveryboy", "deliveryBoyProfileDetails");
+		excelutility.setExcelFile("TestData", "deliveryBoyProfileDetails");
 		Object data[][] = excelutility.getMultiDimensionalData(2, 6);
 		return data;
 	}
-	@DataProvider(name = "deliveryBoyProfileDetailsExcelnonexisting")
+	@DataProvider(name = "SearchExistingDeliveryBoyDetails")
     public Object[][] deliveryBoyProfileDetailsNonExisting() {
-	excelutility.setExcelFile("Deliveryboy", "deliveryBoyProfileDetails");
+	excelutility.setExcelFile("TestData", "deliveryBoyProfileDetails");
 	Object data[][] = excelutility.getMultiDimensionalData(2, 6);
 	return data;
 }
