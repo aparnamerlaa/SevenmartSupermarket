@@ -43,14 +43,16 @@ public class ManageDeliveryBoyPage {
 	private WebElement saveButton;
 	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']/h5")
 	private WebElement alertMessage;
-	@FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']//h5")
+	@FindBy(xpath = "//div[contains(@class,'alert-success ')]")
 	private WebElement alertMessageOfsameUsername;
-	@FindBy(xpath = "//i[@class=' fa fa-search']")
+	@FindBy(xpath = "//a[@onclick='click_button(2)']")
 	private WebElement searchButton;
 	@FindBy(xpath = "//input[@id='un']")
 	private WebElement searchWithName;
 	@FindBy(xpath = "//input[@id='ut']")
 	private WebElement searcheWithEmail;
+	@FindBy(xpath = "//input[@id='ph']")
+	private WebElement searchWithphoneno;
 	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement tableSearchButton;
 	@FindBy(xpath = "//tbody//tr[1]//td[2]")
@@ -61,6 +63,8 @@ public class ManageDeliveryBoyPage {
 	private WebElement resetButton;
 	@FindBy(xpath="//table/tbody/tr/td[1]")//table locate for username
 	private List<WebElement> userNamesFromTable;
+	@FindBy(xpath="//table/tbody/tr/td[1]")//locate for username 
+	private WebElement userNamesFromSearchTable;
 
 	public ManageDeliveryBoyPage(WebDriver driver) {
 		this.driver = driver;
@@ -98,26 +102,19 @@ public class ManageDeliveryBoyPage {
 		saveButton.submit();
 	}
 
-	
-	
-	public String searchNewlyAddedDeliveryBoyInTableByUserName(String expectedUserName) {
-		for(WebElement iter:userNamesFromTable) {
-			ArrayList<String> userNameValues=new ArrayList<String>();
-			String actualUsername=iter.getText();
-			userNameValues.add(actualUsername);
-			if(actualUsername.contains(expectedUserName)) {
-				System.out.println("The searched user is found");
-			}
-			}
-		return expectedUserName;
-	}
-
-	public String alertMessageOfUsernameAlreadyExist() {
+	public boolean alertMessageOfUsernameAlreadyExist() {
 		generalutility = new GeneralUtility(driver);
 
-		return generalutility.gettextofelement(alertMessageOfsameUsername);
+		return generalutility.is_Displayed(alertMessageOfsameUsername);
 
 	}
+	public boolean alertMessageSuccessfullDeliveryBoyCreated() {
+		generalutility = new GeneralUtility(driver);
+
+		return generalutility.is_Displayed(alertMessageOfsameUsername);
+
+	}
+	
 
 	public void clickOnSearchButton() {
 		searchButton.click();
@@ -129,6 +126,9 @@ public class ManageDeliveryBoyPage {
     public void EmailOfExistingDeliveryBoy(String emailOfexistingDeliveryBoy) {
 		searcheWithEmail.sendKeys(emailOfexistingDeliveryBoy);
 	}
+  public void  PhonenumberOfExistingDeliveryBoy(String phonenumofexistingDeliveryBoy) {
+	  searchWithphoneno.sendKeys(phonenumofexistingDeliveryBoy);
+  }
     public void searchForExistingDetails() {
 		tableSearchButton.click();
 	}
@@ -136,6 +136,10 @@ public class ManageDeliveryBoyPage {
 	public String getEmailofExistingDeliveryboy() {
 		generalutility = new GeneralUtility(driver);
         return generalutility.gettextofelement(existingEmail);
+	}
+	public String getusernameofExistingDeliveryboy() {
+		generalutility = new GeneralUtility(driver);
+        return generalutility.gettextofelement(userNamesFromSearchTable);
 	}
 	public String GetAlertofNonExistingDeliveryboy() 
 	{
@@ -153,24 +157,16 @@ public class ManageDeliveryBoyPage {
 			String username, String password) {
         loginpage = new LoginPage(driver);
 	    loginpage.login();
-		hit_ManageDeliveryBoyLink();
-		clickOn_CreateNewButton();
-		enterName_DeliveryBoy(name);
-		enterEmail_DeliveryBoy(email);
-		enterPhonenumber_DeliveryBoy(number);
-		enterAddress_DeliveryBoy(address);
-		enterUserName_DeliveryBoy(username);
-		enterPassword_DeliveryBoy(password);
-		
+		hit_ManageDeliveryBoyLink();		
 	}
-	public void SearchForAlreadyExistingDeliveryBoy(String name, String email) {
+	public void SearchForAlreadyExistingDeliveryBoy(String name, String email,String phonenumber) {
         loginpage = new LoginPage(driver);
 	    loginpage.login();
-		hit_ManageDeliveryBoyLink();
-		clickOnSearchButton();
 		NameOfExistingDeliveryBoy(name);
 		EmailOfExistingDeliveryBoy(email);
+		PhonenumberOfExistingDeliveryBoy(phonenumber);
 		searchForExistingDetails();		
+		
 	}
 	public void ResultforNonExistingDeliveryBoy(String email) {
 		loginpage = new LoginPage(driver);
@@ -180,8 +176,18 @@ public class ManageDeliveryBoyPage {
 		EmailOfExistingDeliveryBoy(email);
 		searchForExistingDetails();		
 	}	
-	public void confirmNewlyAddedDeliveryboyDetails() {
-		
+	public String searchNewlyAddedDeliveryBoyInTableByUserName(String expectedUserName) {
+		for(WebElement iter:userNamesFromTable) {
+			ArrayList<String> userNameValues=new ArrayList<String>();
+			String actualUsername=iter.getText();
+			userNameValues.add(actualUsername);
+			if(actualUsername.contains(expectedUserName)) {//pass this on test
+				System.out.println("The searched user is found");
+			}
+			
+			}
+	
+		return expectedUserName;
 	}
 	
 	}

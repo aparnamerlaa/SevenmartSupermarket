@@ -21,13 +21,13 @@ public class TestDataProviders {
 	@DataProvider(name = "invalidlogin")
     public Object[][] Invalidlogindetailsinexcel() {
 	excelutility.setExcelFile("TestData", "Invalidlogincredential");
-	Object data[][] = excelutility.getMultiDimensionalData(2, 2);
+	Object data[][] = excelutility.getMultiDimensionalData(1, 1);
 	return data;
 	}
 	@DataProvider(name = "Adminusersdetails")
     public Object[][] Adminuserdetailsinexcel() {
 	excelutility.setExcelFile("TestData","adminPage");
-	Object data[][] = excelutility.getMultiDimensionalData(2, 3);
+	Object data[][] = excelutility.getMultiDimensionalData(1, 2);
 	return data;
 }
 }

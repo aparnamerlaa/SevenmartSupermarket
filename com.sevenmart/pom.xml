@@ -19,7 +19,7 @@
 					<version>3.1.2</version>
 					<configuration>
 						<suiteXmlFiles>
-							<file>src/test/resources/groups.xml</file>
+							<file>src/main/resources/XML Files/groups.xml</file>
 
 						</suiteXmlFiles>
 					</configuration>

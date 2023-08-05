@@ -16,6 +16,7 @@ public class ManageDeliveryBoyTest extends Base {
 	ManageDeliveryBoyPage manageDeliveryBoy;
 	LoginPage loginPage;
 	PageUtility pageUtility;
+	ExcelUtility excelUtility;
 //pass
 	@Test
 	public void verify_ManageDeliveryboy() {
@@ -27,7 +28,7 @@ public class ManageDeliveryBoyTest extends Base {
 
 	}
 //pass
-	@Test(dataProvider = "DeliveryBoyDetails", dataProviderClass =  DeliveryBoyDataProvider.class)
+	@Test(dataProvider = "deliveryBoyProfileDetailsExcel", dataProviderClass =  DeliveryBoyDataProvider.class)
 	public void Verify_CreateNewDeliveryBoyDetails(String name, String email, String number, String address,
 			String username, String password) {
 		
@@ -40,38 +41,48 @@ public class ManageDeliveryBoyTest extends Base {
 		manageDeliveryBoy.enterEmail_DeliveryBoy(email);
 		manageDeliveryBoy.enterPhonenumber_DeliveryBoy(number);
 		manageDeliveryBoy.enterAddress_DeliveryBoy(address);
-		manageDeliveryBoy.enterUserName_DeliveryBoy(username + GeneralUtility.getRandomName());
+		manageDeliveryBoy.enterUserName_DeliveryBoy(username);
 		manageDeliveryBoy.enterPassword_DeliveryBoy(password);
 		manageDeliveryBoy.clickOnSaveButton_DeliveryBoy();
-		String actualresult=manageDeliveryBoy.searchNewlyAddedDeliveryBoyInTableByUserName(username);
-		String expectedresult="	ApaRajshGreta";
-		Assert.assertEquals(actualresult,expectedresult,"Result not found");
+		Assert.assertTrue(manageDeliveryBoy.alertMessageSuccessfullDeliveryBoyCreated(),"New Deliveryboy creation failed");
+		
+        
+	}
+//pass
+	@Test(dataProvider = "deliveryBoyAlreadyExistingDetailsExcel", dataProviderClass = DeliveryBoyDataProvider.class)
+	public void Verify_AlreadyExistingUsername(String name, String email, String number, String address,
+			String username, String password) {
+
+		loginPage = new LoginPage(driver);
+		excelUtility=new ExcelUtility();
+		excelUtility.setExcelFile("Deliveryboy","Sheet2");
+		String expectedusername=excelUtility.getCellData(1, 4);
+		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
+	    manageDeliveryBoy.AlreadyExistingUsername(name, email, number, address, username, password);
+	    String actualusername=manageDeliveryBoy.searchNewlyAddedDeliveryBoyInTableByUserName(expectedusername);
+		Assert.assertEquals(actualusername, expectedusername,"Username not found");
+		
 	}
 
-	@Test(dataProvider = "deliveryBoyProfileDetailsExcelnonexisting", dataProviderClass = DeliveryBoyDataProvider.class)
-	public void Verify_AlreadyExistingUsername(String name, String email, String number, String address,
+	@Test(dataProvider = "deliveryBoyAlreadyExistingDetailsExcel", dataProviderClass = DeliveryBoyDataProvider.class)
+
+	public void Verify_SearchForAlreadyExistingDeliveryBoy(String name, String email, String number, String address,
 			String username, String password) {
 
 		loginPage = new LoginPage(driver);
 		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
 		loginPage.login();
-		manageDeliveryBoy.AlreadyExistingUsername(name, email, number, address, username, password);
-		manageDeliveryBoy.clickOnSaveButton_DeliveryBoy();
-	}
-
-	@Test(dataProvider = "SearchExistingDeliveryBoyDetails", dataProviderClass = DeliveryBoyDataProvider.class)
-
-	public void Verify_SearchForAlreadyExistingDeliveryBoy(String name, String email) {
-
-		loginPage = new LoginPage(driver);
-		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
-		loginPage.login();
+		excelUtility=new ExcelUtility();
+		excelUtility.setExcelFile("Deliveryboy","Sheet2");
+		String deliveryboyname=excelUtility.getCellData(0, 0);
+		String deliveryboyemail=excelUtility.getCellData(0,1 );
+		String phonenum=excelUtility.getCellData(0,1 );
+		String expectedusername=excelUtility.getCellData(0,4 );
 		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
-		manageDeliveryBoy.SearchForAlreadyExistingDeliveryBoy(name, email);
-		String actualText = manageDeliveryBoy.getEmailofExistingDeliveryboy();
-		String expectedText = email;
-		Assert.assertEquals(actualText, expectedText);
-
+		manageDeliveryBoy.clickOnSearchButton();
+		manageDeliveryBoy.SearchForAlreadyExistingDeliveryBoy(deliveryboyname,deliveryboyemail,phonenum);
+		String actualusername = manageDeliveryBoy.getusernameofExistingDeliveryboy();
+		Assert.assertEquals(actualusername,expectedusername,"Existing User not found");
 	}
 
 	@Test(dataProvider = "nonexistingemailofDeliveryBoyDetails", dataProviderClass = DeliveryBoyDataProvider.class)

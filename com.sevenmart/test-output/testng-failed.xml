@@ -5,7 +5,7 @@
     <classes>
       <class name="com.sevenmart.tests.ManageDeliveryBoyTest">
         <methods>
-          <include name="Verify_CreateNewDeliveryBoyDetails" invocation-numbers="0"/>
+          <include name="Verify_SearchForAlreadyExistingDeliveryBoy" invocation-numbers="0 1"/>
           <include name="closeBrowser"/>
           <include name="launchBrowser"/>
           <include name="launchBrowser"/>

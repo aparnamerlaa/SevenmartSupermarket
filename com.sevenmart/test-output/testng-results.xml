@@ -1,61 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="4" total="5" passed="0" failed="1" skipped="0">
+<testng-results ignored="4" total="6" passed="0" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-08-03T07:27:07 IST" name="Default suite" finished-at="2023-08-03T07:28:39 IST" duration-ms="92187">
+  <suite started-at="2023-08-05T11:46:48 IST" name="Default suite" finished-at="2023-08-05T11:47:21 IST" duration-ms="33380">
     <groups>
     </groups>
-    <test started-at="2023-08-03T07:27:07 IST" name="Default test" finished-at="2023-08-03T07:28:39 IST" duration-ms="92187">
+    <test started-at="2023-08-05T11:46:48 IST" name="Default test" finished-at="2023-08-05T11:47:21 IST" duration-ms="33380">
       <class name="com.sevenmart.tests.ManageDeliveryBoyTest">
-        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-03T07:27:07 IST" name="launchBrowser" finished-at="2023-08-03T07:28:36 IST" duration-ms="88787" status="PASS">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-05T11:46:48 IST" name="launchBrowser" finished-at="2023-08-05T11:46:55 IST" duration-ms="6236" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- launchBrowser -->
-        <test-method signature="Verify_CreateNewDeliveryBoyDetails(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-03T07:28:36 IST" name="Verify_CreateNewDeliveryBoyDetails" data-provider="DeliveryBoyDetails" finished-at="2023-08-03T07:28:39 IST" duration-ms="3139" status="FAIL">
+        <test-method signature="Verify_SearchForAlreadyExistingDeliveryBoy(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-05T11:46:55 IST" name="Verify_SearchForAlreadyExistingDeliveryBoy" data-provider="deliveryBoyAlreadyExistingDetailsExcel" finished-at="2023-08-05T11:47:06 IST" duration-ms="11157" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Merla]]>
+                <![CDATA[Remya]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[rayon1s5@gmail.com]]>
+                <![CDATA[aparna@gmail.com]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[2434525]]>
+                <![CDATA[2323]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[Shasff]]>
+                <![CDATA[sfvfv]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[ApaRajsh]]>
+                <![CDATA[akkku21ws]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[Aparsfna1987]]>
+                <![CDATA[asasa]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.AssertionError">
+          <exception class="org.openqa.selenium.NoSuchElementException">
             <message>
-              <![CDATA[Result not found expected [ApaRajshGreta] but found [ApaRajsh]]]>
+              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//input[@class='form-control' and @placeholder='Username']"}
+  (Session info: chrome=115.0.5790.170)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.8.3', revision: 'e5e76298c3'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [6d3201de5e31369e3032bb4e1592f699, findElement {using=xpath, value=//input[@class='form-control' and @placeholder='Username']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 115.0.5790.170, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\Users\APARNA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60241}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:60241/devtoo..., se:cdpVersion: 115.0.5790.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6d3201de5e31369e3032bb4e1592f699]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Result not found expected [ApaRajshGreta] but found [ApaRajsh]
-at org.testng.Assert.fail(Assert.java:110)
-at org.testng.Assert.failNotEquals(Assert.java:1577)
-at org.testng.Assert.assertEqualsImpl(Assert.java:149)
-at org.testng.Assert.assertEquals(Assert.java:131)
-at org.testng.Assert.assertEquals(Assert.java:655)
-at com.sevenmart.tests.ManageDeliveryBoyTest.Verify_CreateNewDeliveryBoyDetails(ManageDeliveryBoyTest.java:48)
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//input[@class='form-control' and @placeholder='Username']"}
+  (Session info: chrome=115.0.5790.170)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.8.3', revision: 'e5e76298c3'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [6d3201de5e31369e3032bb4e1592f699, findElement {using=xpath, value=//input[@class='form-control' and @placeholder='Username']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 115.0.5790.170, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\Users\APARNA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60241}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:60241/devtoo..., se:cdpVersion: 115.0.5790.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6d3201de5e31369e3032bb4e1592f699
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:193)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:183)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:158)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:543)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:352)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:70)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:39)
+at com.sun.proxy.$Proxy18.sendKeys(Unknown Source)
+at com.sevenmart.pages.LoginPage.enterUserName(LoginPage.java:50)
+at com.sevenmart.pages.LoginPage.login(LoginPage.java:71)
+at com.sevenmart.pages.ManageDeliveryBoyPage.SearchForAlreadyExistingDeliveryBoy(ManageDeliveryBoyPage.java:164)
+at com.sevenmart.tests.ManageDeliveryBoyTest.Verify_SearchForAlreadyExistingDeliveryBoy(ManageDeliveryBoyTest.java:83)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -86,15 +118,141 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Verify_CreateNewDeliveryBoyDetails -->
-        <test-method is-config="true" signature="closeBrowser(org.testng.ITestResult)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-03T07:28:39 IST" name="closeBrowser" finished-at="2023-08-03T07:28:39 IST" duration-ms="177" status="PASS">
+        </test-method> <!-- Verify_SearchForAlreadyExistingDeliveryBoy -->
+        <test-method is-config="true" signature="closeBrowser(org.testng.ITestResult)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-05T11:47:06 IST" name="closeBrowser" finished-at="2023-08-05T11:47:06 IST" duration-ms="131" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=Verify_CreateNewDeliveryBoyDetails status=FAILURE method=ManageDeliveryBoyTest.Verify_CreateNewDeliveryBoyDetails(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04] output={null}]]]>
+                <![CDATA[[TestResult name=Verify_SearchForAlreadyExistingDeliveryBoy status=FAILURE method=ManageDeliveryBoyTest.Verify_SearchForAlreadyExistingDeliveryBoy(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-05T11:47:06 IST" name="launchBrowser" finished-at="2023-08-05T11:47:10 IST" duration-ms="3930" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchBrowser -->
+        <test-method signature="Verify_SearchForAlreadyExistingDeliveryBoy(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-05T11:47:10 IST" name="Verify_SearchForAlreadyExistingDeliveryBoy" data-provider="deliveryBoyAlreadyExistingDetailsExcel" finished-at="2023-08-05T11:47:21 IST" duration-ms="11159" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Aswathi]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[gopi@gmail.com]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[3141]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[vavf]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[Shiju23aa]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[sswww]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//input[@class='form-control' and @placeholder='Username']"}
+  (Session info: chrome=115.0.5790.170)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.8.3', revision: 'e5e76298c3'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a6ebc930a04da7551e6a375054f02f7e, findElement {using=xpath, value=//input[@class='form-control' and @placeholder='Username']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 115.0.5790.170, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\Users\APARNA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60271}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:60271/devtoo..., se:cdpVersion: 115.0.5790.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a6ebc930a04da7551e6a375054f02f7e]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//input[@class='form-control' and @placeholder='Username']"}
+  (Session info: chrome=115.0.5790.170)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.8.3', revision: 'e5e76298c3'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a6ebc930a04da7551e6a375054f02f7e, findElement {using=xpath, value=//input[@class='form-control' and @placeholder='Username']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 115.0.5790.170, chrome: {chromedriverVersion: 114.0.5735.90 (386bc09e8f4f..., userDataDir: C:\Users\APARNA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60271}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:60271/devtoo..., se:cdpVersion: 115.0.5790.170, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a6ebc930a04da7551e6a375054f02f7e
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:193)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:183)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:158)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:543)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:352)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:70)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:39)
+at com.sun.proxy.$Proxy18.sendKeys(Unknown Source)
+at com.sevenmart.pages.LoginPage.enterUserName(LoginPage.java:50)
+at com.sevenmart.pages.LoginPage.login(LoginPage.java:71)
+at com.sevenmart.pages.ManageDeliveryBoyPage.SearchForAlreadyExistingDeliveryBoy(ManageDeliveryBoyPage.java:164)
+at com.sevenmart.tests.ManageDeliveryBoyTest.Verify_SearchForAlreadyExistingDeliveryBoy(ManageDeliveryBoyTest.java:83)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:969)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+at org.testng.TestRunner.privateRun(TestRunner.java:829)
+at org.testng.TestRunner.run(TestRunner.java:602)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Verify_SearchForAlreadyExistingDeliveryBoy -->
+        <test-method is-config="true" signature="closeBrowser(org.testng.ITestResult)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04]" started-at="2023-08-05T11:47:21 IST" name="closeBrowser" finished-at="2023-08-05T11:47:21 IST" duration-ms="265" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=Verify_SearchForAlreadyExistingDeliveryBoy status=FAILURE method=ManageDeliveryBoyTest.Verify_SearchForAlreadyExistingDeliveryBoy(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.sevenmart.tests.ManageDeliveryBoyTest@14fc5f04] output={null}]]]>
               </value>
             </param>
           </params>
