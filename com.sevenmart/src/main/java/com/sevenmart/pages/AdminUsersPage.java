@@ -21,24 +21,29 @@ public class AdminUsersPage {
 
 	int pos = 0;
 
-	@FindBy(xpath = "//li//a//i[@class='nav-icon fas fa-users']")
-	WebElement adminUsers;
+	@FindBy(xpath = "//a[@href='https://groceryapp.uniqassosiates.com/admin/list-admin' and @class=' nav-link']")
+	private WebElement adminUsers;
 
 	@FindBy(xpath = "//li[@class='breadcrumb-item active']")
-	WebElement adminuserspage;
+	private WebElement adminuserspage;
 	@FindBy(xpath = "//a[@onclick='click_button(1)']")
-	WebElement clickOnNewButton;
+	private WebElement clickOnNewButton;
 	@FindBy(xpath = "//input[@id='username']")
-	WebElement username_AdminUsers;
+	private WebElement username_AdminUsers;
 	@FindBy(xpath = "//input[@id='password']")
-	WebElement password_AdminUsers;
+	private WebElement password_AdminUsers;
 	@FindBy(xpath = "//select[@id='user_type']")
-	WebElement selectUserType;
+	private WebElement selectUserType;
 	@FindBy(xpath = "//button[@type='submit' and @name='Create']")
-	WebElement saveButton;
+	private WebElement saveButton;
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
 	private List<WebElement> userNames;
-
+	@FindBy(xpath = "//table/tbody/tr[1]/td[1]")
+	private WebElement newuserName;
+	
+	
+	
+	
 	public AdminUsersPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -67,44 +72,29 @@ public class AdminUsersPage {
 		password_AdminUsers.sendKeys(password);
 	}
 
-	public void selectStaffUsers() {
-		PageUtility pageUtility = new PageUtility(driver);
-		pageUtility.select_ByVisibleText(selectUserType, "Staff");
-		saveButton.submit();
+	public void selectUserType(String userType) {
+		pageutility = new PageUtility(driver);
+		if (userType.equals("Staff")) {
+			pageutility.select_ByVisibleText(selectUserType, "Staff");
+		} else if (userType.equals("Admin")) {
+			pageutility.select_ByVisibleText(selectUserType, "Admin");
+		} else if (userType.equals("Partner")) {
+			pageutility.select_ByVisibleText(selectUserType, "Partner");
+		} else if (userType.equals("Delivery Boy")) {
+			pageutility.select_ByVisibleText(selectUserType, "Delivery Boy");
+		}
+
 	}
 
-	public void selectAdminUsers() {
-		PageUtility pageUtility = new PageUtility(driver);
-		pageUtility.select_ByVisibleText( adminUsers, "Admin");
-		clickSaveButton();
-	}
-
-	public void selectPartnerUsers() {
-		PageUtility pageUtility = new PageUtility(driver);
-		pageUtility.select_ByVisibleText(selectUserType, "Partner");
+	public void clickSaveButton() {
 		saveButton.click();
 	}
-
-	public void selectDeliveryBoyUsers() {
-		PageUtility pageUtility = new PageUtility(driver);
-		pageUtility.select_ByVisibleText(selectUserType, "Delivery Boy");
-		saveButton.click();
-	}
-
-   public void clickSaveButton() {
-	saveButton.click();
-}
-
-	public void AddNewAdminUsers(String username, String password) {
-		LoginPage loginpage = new LoginPage(driver);
-		loginpage.login();
-		hitAdminUsers();
-		clickOnNewButton();
-		enterUserName(username);
-		enterPassword(password);
-		selectAdminUsers();
+	public String checkNewAdminUserCreatedOrNot() {
+		generalutility = new GeneralUtility(driver);
+		return generalutility.gettextofelement(newuserName);
 
 	}
+
 
 	public void deleteUser(String personName) {
 		GeneralUtility generalUtility = new GeneralUtility(driver);
@@ -125,5 +115,6 @@ public class AdminUsersPage {
 		pageUtility.scrollAndClick(deleteButton);
 
 	}
+	
 
 }

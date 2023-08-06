@@ -76,5 +76,7 @@ public class Base {
 		if (itestresult.getStatus() == ITestResult.FAILURE) {
 			screenShotUtility.takeScreenShot(driver, itestresult.getName());
 		}
+		driver.close();
 	}
+
 }

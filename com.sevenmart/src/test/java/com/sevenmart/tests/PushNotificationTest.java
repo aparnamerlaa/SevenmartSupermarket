@@ -1,5 +1,6 @@
 package com.sevenmart.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.sevenmart.base.Base;
@@ -19,6 +20,7 @@ public class PushNotificationTest extends Base
 		pushnotificationpage=new PushNotificationPage(driver);
 		loginpage.login();
 		pushnotificationpage.clickOn_PushNotification();
+		//Assert.assertTrue(pushnotificationpage.checkPushNotificationPage(),"Push Notification Page not found");
 		
 }
 	}

@@ -19,7 +19,9 @@ public class PushNotificationPage {
 
 	@FindBy(xpath = "//i[@class='nav-icon fas fa-fas fa-bell']")
 	private WebElement pushNotification;
-	
+
+	@FindBy(xpath = "li[@class='breadcrumb-item active']")
+	private WebElement pushNotificationpage;
 	
 	public PushNotificationPage(WebDriver driver) {
 		this.driver = driver;
@@ -30,7 +32,10 @@ public class PushNotificationPage {
 		{
 			pushNotification.click();
 		}
-		
+		public boolean checkPushNotificationPage() {
+			generalutility = new GeneralUtility(driver);
+			return generalutility.is_Displayed(pushNotificationpage);
+		}
 	}
 	
 	

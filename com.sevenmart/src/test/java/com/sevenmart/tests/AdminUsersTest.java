@@ -18,66 +18,105 @@ import com.sevenmart.pages.LoginPage;
 public class AdminUsersTest extends Base {
 
 	LoginPage loginpage;
-    AdminUsersPage adminuserspage;
+	AdminUsersPage adminuserspage;
+	ExcelUtility excelUtility;
 
-	@Test(priority = 1,groups = "smoke")
+	@Test(priority = 1, groups = "smoke")
 	public void Verify_HitAdminUser() {
 
 		loginpage = new LoginPage(driver);
 		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.hitAdminUsers();
-		String actuaresult=adminuserspage.adminUsersPageVerification();
-		String expectedresult="Admin Users";
-		Assert.assertEquals(actuaresult, expectedresult,"Not in Admin usersPage");
+		String actuaresult = adminuserspage.adminUsersPageVerification();
+		String expectedresult = "Admin Users";
+		Assert.assertEquals(actuaresult, expectedresult, "Not in Admin usersPage");
 
 	}
 
-	@Test(dataProvider = "Adminusersdetails", dataProviderClass = TestDataProviders.class)
-	public void Verify_AddNewAdminUsers(String username, String password) {
+	@Test
+	public void Verify_AddNewAdminUsers() {
 		loginpage = new LoginPage(driver);
-		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
-		adminuserspage.AddNewAdminUsers(username, password);
-	}
-
-	@Test(dataProvider = "StaffUsers", dataProviderClass = AdminUsersDataProvider.class)
-	public void Verify_AddNewStaffUsers(String username, String password) {
-		loginpage = new LoginPage(driver);
+		excelUtility = new ExcelUtility();
 		loginpage.login();
-		adminuserspage = new AdminUsersPage(driver);
 		adminuserspage.hitAdminUsers();
 		adminuserspage.clickOnNewButton();
-		adminuserspage.enterUserName(username);
-		adminuserspage.enterPassword(password);
-		adminuserspage.selectStaffUsers();
+		excelUtility.setExcelFile("AdminUsers", "newAdminUser");
+		String userName = excelUtility.getCellData(0, 0);
+		String passWord = excelUtility.getCellData(0, 1);
+		adminuserspage.enterUserName(userName);
+		adminuserspage.enterPassword(passWord);
+		adminuserspage.selectUserType("Admin");
+		adminuserspage.clickSaveButton();
+		String expectedUser = userName;
+		String actualuser = adminuserspage.checkNewAdminUserCreatedOrNot();
+		Assert.assertEquals(actualuser, expectedUser, "New user not created");
+
+	}
+
+	@Test
+	public void Verify_AddNewStaffUsers(String username, String password) {
+		loginpage = new LoginPage(driver);
+		adminuserspage = new AdminUsersPage(driver);
+		excelUtility = new ExcelUtility();
+		loginpage.login();
+		adminuserspage.hitAdminUsers();
+		adminuserspage.clickOnNewButton();
+		excelUtility.setExcelFile("AdminUsers", "newAdminUser");
+		String userName = excelUtility.getCellData(1, 0);
+		String passWord = excelUtility.getCellData(1, 1);
+		adminuserspage.enterUserName(userName);
+		adminuserspage.enterPassword(passWord);
+		adminuserspage.selectUserType("Staff");
+		adminuserspage.clickSaveButton();
+		String expectedUser = userName;
+		String actualuser = adminuserspage.checkNewAdminUserCreatedOrNot();
+		Assert.assertEquals(actualuser, expectedUser, "New Adminuser not created");
 
 	}
 
 	@Test(dataProvider = "PartnerUsers", dataProviderClass = AdminUsersDataProvider.class)
 	public void Verify_AddNewPartnerUsers(String username, String password) {
 		loginpage = new LoginPage(driver);
-		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
+		excelUtility = new ExcelUtility();
+		loginpage.login();
 		adminuserspage.hitAdminUsers();
 		adminuserspage.clickOnNewButton();
-		adminuserspage.enterUserName(username);
-		adminuserspage.enterPassword(password);
-		adminuserspage.selectPartnerUsers();
+		excelUtility.setExcelFile("AdminUsers", "newAdminUser");
+		String userName = excelUtility.getCellData(2, 0);
+		String passWord = excelUtility.getCellData(2, 1);
+		adminuserspage.enterUserName(userName);
+		adminuserspage.enterPassword(passWord);
+		adminuserspage.selectUserType("Partner");
+		adminuserspage.clickSaveButton();
+		String expectedUser = userName;
+		String actualuser = adminuserspage.checkNewAdminUserCreatedOrNot();
+		Assert.assertEquals(actualuser, expectedUser, "New Parter user not created");
 
 	}
-
-	@Test(dataProvider = "DeliveryBoyUsers", dataProviderClass = AdminUsersDataProvider.class, groups={"smoke","regression"})
 	
-	public void Verify_AddNewDeliveryBoyUsers(String username, String password) {
+
+	@Test
+
+	public void Verify_AddNewDeliveryBoyUsers() {
 		loginpage = new LoginPage(driver);
-		loginpage.login();
 		adminuserspage = new AdminUsersPage(driver);
+		excelUtility = new ExcelUtility();
+		loginpage.login();
 		adminuserspage.hitAdminUsers();
 		adminuserspage.clickOnNewButton();
-		adminuserspage.enterUserName(username);
-		adminuserspage.enterPassword(password);
-		adminuserspage.selectDeliveryBoyUsers();
+		excelUtility.setExcelFile("AdminUsers", "newAdminUser");
+		String userName = excelUtility.getCellData(3, 0);
+		String passWord = excelUtility.getCellData(3, 1);
+		adminuserspage.enterUserName(userName);
+		adminuserspage.enterPassword(passWord);
+		adminuserspage.selectUserType("Delivery Boy");
+		adminuserspage.clickSaveButton();
+		String expectedUser = userName;
+		String actualuser = adminuserspage.checkNewAdminUserCreatedOrNot();
+		Assert.assertEquals(actualuser, expectedUser, "New DeliveryBoyuser not created");
 
 	}
 
@@ -87,7 +126,11 @@ public class AdminUsersTest extends Base {
 		adminuserspage = new AdminUsersPage(driver);
 		loginpage.login();
 		adminuserspage.hitAdminUsers();
-		adminuserspage.deleteUser("Shashi");
+		adminuserspage.deleteUser("Aparnamerla");
+		
+		
+		
+		
 
 	}
 }

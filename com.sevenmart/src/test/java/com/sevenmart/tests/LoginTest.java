@@ -23,7 +23,7 @@ public class LoginTest extends Base {
 		loginpage.login();
 		String actualProfileName = homepage.getProfileName();
 		String expectedProfileName = "Dashboard";
-		Assert.assertEquals(actualProfileName, expectedProfileName, "Not valid userlogin");
+		Assert.assertEquals(actualProfileName, expectedProfileName, "Admin login Failed");
 	}
 
 	@Test
@@ -35,15 +35,12 @@ public class LoginTest extends Base {
 		loginpage.login(inValidUserName, invalidPassword);
 		String actualErrorMessage = loginpage.getErrorMessage();
 		String expectedErrorMessage = "Alert!";
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Invalid user");
+		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Logged in successfully using wrong credential");
 	}
-
-	@Test(dataProvider = "invalidlogin", dataProviderClass = TestDataProviders.class)
-	public void verify_InvalidUserLogin1(String userName, String password) {
-		loginpage = new LoginPage(driver);
-		loginpage.login(userName, password);
-		String actualErrorMessage = loginpage.getErrorMessage();
-		String expectedErrorMessage = "Alert!";
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Invalid username and Password");
-	}
+	@Test
+   public void verify_RemebermeCheckboxNotSelectedbydefault() {
+	loginpage = new LoginPage(driver);
+	Assert.assertFalse(loginpage.checkboxSelectedInLoginPage(),"Remember me CheckBox is selected by default");
+	
+}
 }

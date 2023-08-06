@@ -60,8 +60,8 @@ public class LoginPage {
 	}
 
 	public void clickonSignInButton() {
-		//waitutility = new WaitUtility(driver);
-		//waitutility.waitForClickable(signInButton);
+		waitutility = new WaitUtility(driver);
+		waitutility.waitForClickable(signInButton);
 		signInButton.click();
 	}
 
@@ -81,8 +81,12 @@ public class LoginPage {
 	}
 
 	public String getErrorMessage() {
-		GeneralUtility generalutility = new GeneralUtility(driver);
+	    generalutility = new GeneralUtility(driver);
 		return generalutility.gettextofelement(alertMessage);
 	}
-
+   public boolean checkboxSelectedInLoginPage() {
+	generalutility = new GeneralUtility(driver);
+	return generalutility.is_Selected(rememberMeCheckBox);
+	
+}
 }

@@ -76,11 +76,14 @@ public class ManageDeliveryBoyTest extends Base {
 		excelUtility.setExcelFile("Deliveryboy","Sheet2");
 		String deliveryboyname=excelUtility.getCellData(0, 0);
 		String deliveryboyemail=excelUtility.getCellData(0,1 );
-		String phonenum=excelUtility.getCellData(0,1 );
+		String phonenum=excelUtility.getCellData(0,2 );
 		String expectedusername=excelUtility.getCellData(0,4 );
 		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
 		manageDeliveryBoy.clickOnSearchButton();
-		manageDeliveryBoy.SearchForAlreadyExistingDeliveryBoy(deliveryboyname,deliveryboyemail,phonenum);
+		manageDeliveryBoy.NameOfExistingDeliveryBoy(deliveryboyname);
+		manageDeliveryBoy.EmailOfExistingDeliveryBoy(deliveryboyemail);
+		manageDeliveryBoy.PhonenumberOfExistingDeliveryBoy(phonenum);
+		manageDeliveryBoy.searchForExistingDetails();	
 		String actualusername = manageDeliveryBoy.getusernameofExistingDeliveryboy();
 		Assert.assertEquals(actualusername,expectedusername,"Existing User not found");
 	}
@@ -92,7 +95,11 @@ public class ManageDeliveryBoyTest extends Base {
 		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
 		loginPage.login();
 		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
+		manageDeliveryBoy.clickOnSearchButton();
 		manageDeliveryBoy.ResultforNonExistingDeliveryBoy(email);
+		Assert.assertTrue(manageDeliveryBoy.noResultFound());
+		
+		
 		
 	}
 

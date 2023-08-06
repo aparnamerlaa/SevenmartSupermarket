@@ -58,12 +58,12 @@ public class ManageDeliveryBoyPage {
 	@FindBy(xpath = "//tbody//tr[1]//td[2]")
 	private WebElement existingEmail;
 	@FindBy(xpath = "//tbody//tr//td/span[@id='res']")
-	private WebElement nonexistingEmail;
+	private WebElement resultNotFound;
     @FindBy(xpath = "//button[@type='submit']")
 	private WebElement resetButton;
 	@FindBy(xpath="//table/tbody/tr/td[1]")//table locate for username
 	private List<WebElement> userNamesFromTable;
-	@FindBy(xpath="//table/tbody/tr/td[1]")//locate for username 
+	@FindBy(xpath="//table/tbody/tr/td[5]")//locate for username 
 	private WebElement userNamesFromSearchTable;
 
 	public ManageDeliveryBoyPage(WebDriver driver) {
@@ -141,10 +141,10 @@ public class ManageDeliveryBoyPage {
 		generalutility = new GeneralUtility(driver);
         return generalutility.gettextofelement(userNamesFromSearchTable);
 	}
-	public String GetAlertofNonExistingDeliveryboy() 
+	public boolean noResultFound() 
 	{
 		generalutility = new GeneralUtility(driver);
-        return generalutility.gettextofelement(nonexistingEmail);
+        return generalutility.is_Displayed(resultNotFound);
 
 	}
 	public void hitOnManageDeliveryboy() {
@@ -159,20 +159,9 @@ public class ManageDeliveryBoyPage {
 	    loginpage.login();
 		hit_ManageDeliveryBoyLink();		
 	}
-	public void SearchForAlreadyExistingDeliveryBoy(String name, String email,String phonenumber) {
-        loginpage = new LoginPage(driver);
-	    loginpage.login();
-		NameOfExistingDeliveryBoy(name);
-		EmailOfExistingDeliveryBoy(email);
-		PhonenumberOfExistingDeliveryBoy(phonenumber);
-		searchForExistingDetails();		
-		
-	}
+
 	public void ResultforNonExistingDeliveryBoy(String email) {
-		loginpage = new LoginPage(driver);
-		loginpage.login();
-	    hit_ManageDeliveryBoyLink();
-		clickOnSearchButton();
+		
 		EmailOfExistingDeliveryBoy(email);
 		searchForExistingDetails();		
 	}	

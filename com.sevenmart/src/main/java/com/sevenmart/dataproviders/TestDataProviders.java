@@ -25,7 +25,7 @@ public class TestDataProviders {
 	return data;
 	}
 	@DataProvider(name = "Adminusersdetails")
-    public Object[][] Adminuserdetailsinexcel() {
+    public Object[][] Adminuserdetailsinexcel(){
 	excelutility.setExcelFile("TestData","adminPage");
 	Object data[][] = excelutility.getMultiDimensionalData(1, 2);
 	return data;
