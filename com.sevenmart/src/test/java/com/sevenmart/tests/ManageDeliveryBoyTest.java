@@ -28,7 +28,7 @@ public class ManageDeliveryBoyTest extends Base {
 
 	}
 //pass
-	@Test(dataProvider = "deliveryBoyProfileDetailsExcel", dataProviderClass =  DeliveryBoyDataProvider.class)
+	@Test(dataProvider = "deliveryBoyProfileDetailsExcel", dataProviderClass =  DeliveryBoyDataProvider.class,groups = "smoke")
 	public void Verify_CreateNewDeliveryBoyDetails(String name, String email, String number, String address,
 			String username, String password) {
 		
@@ -48,7 +48,8 @@ public class ManageDeliveryBoyTest extends Base {
 		
         
 	}
-//pass
+	
+
 	@Test(dataProvider = "deliveryBoyAlreadyExistingDetailsExcel", dataProviderClass = DeliveryBoyDataProvider.class)
 	public void Verify_AlreadyExistingUsername(String name, String email, String number, String address,
 			String username, String password) {
@@ -56,7 +57,7 @@ public class ManageDeliveryBoyTest extends Base {
 		loginPage = new LoginPage(driver);
 		excelUtility=new ExcelUtility();
 		excelUtility.setExcelFile("Deliveryboy","Sheet2");
-		String expectedusername=excelUtility.getCellData(1, 4);
+		String expectedusername=username;
 		manageDeliveryBoy = new ManageDeliveryBoyPage(driver);
 	    manageDeliveryBoy.AlreadyExistingUsername(name, email, number, address, username, password);
 	    String actualusername=manageDeliveryBoy.searchNewlyAddedDeliveryBoyInTableByUserName(expectedusername);
@@ -74,15 +75,12 @@ public class ManageDeliveryBoyTest extends Base {
 		loginPage.login();
 		excelUtility=new ExcelUtility();
 		excelUtility.setExcelFile("Deliveryboy","Sheet2");
-		String deliveryboyname=excelUtility.getCellData(0, 0);
-		String deliveryboyemail=excelUtility.getCellData(0,1 );
-		String phonenum=excelUtility.getCellData(0,2 );
-		String expectedusername=excelUtility.getCellData(0,4 );
+		String expectedusername=username;
 		manageDeliveryBoy.hit_ManageDeliveryBoyLink();
 		manageDeliveryBoy.clickOnSearchButton();
-		manageDeliveryBoy.NameOfExistingDeliveryBoy(deliveryboyname);
-		manageDeliveryBoy.EmailOfExistingDeliveryBoy(deliveryboyemail);
-		manageDeliveryBoy.PhonenumberOfExistingDeliveryBoy(phonenum);
+		manageDeliveryBoy.NameOfExistingDeliveryBoy(name);
+		manageDeliveryBoy.EmailOfExistingDeliveryBoy(email);
+		manageDeliveryBoy.PhonenumberOfExistingDeliveryBoy(number);
 		manageDeliveryBoy.searchForExistingDetails();	
 		String actualusername = manageDeliveryBoy.getusernameofExistingDeliveryboy();
 		Assert.assertEquals(actualusername,expectedusername,"Existing User not found");

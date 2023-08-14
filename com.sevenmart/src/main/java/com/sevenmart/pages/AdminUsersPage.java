@@ -40,6 +40,10 @@ public class AdminUsersPage {
 	private List<WebElement> userNames;
 	@FindBy(xpath = "//table/tbody/tr[1]/td[1]")
 	private WebElement newuserName;
+	@FindBy(xpath = "//div[@class='alert alert-success alert-dismissible']")
+	private WebElement deleteSuccessfullAlert;
+	
+	
 	
 	
 	
@@ -94,7 +98,10 @@ public class AdminUsersPage {
 		return generalutility.gettextofelement(newuserName);
 
 	}
-
+public boolean alertDeleteMessage() {
+	GeneralUtility generalUtility = new GeneralUtility(driver);
+	return generalUtility.is_Displayed(deleteSuccessfullAlert);
+}
 
 	public void deleteUser(String personName) {
 		GeneralUtility generalUtility = new GeneralUtility(driver);

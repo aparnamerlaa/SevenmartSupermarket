@@ -13,6 +13,8 @@ import com.sevenmart.dataproviders.AdminUsersDataProvider;
 import com.sevenmart.dataproviders.TestDataProviders;
 import com.sevenmart.pages.AdminUsersPage;
 import com.sevenmart.utilities.ExcelUtility;
+import com.sevenmart.utilities.GeneralUtility;
+import com.sevenmart.utilities.PageUtility;
 import com.sevenmart.pages.LoginPage;
 
 public class AdminUsersTest extends Base {
@@ -20,6 +22,8 @@ public class AdminUsersTest extends Base {
 	LoginPage loginpage;
 	AdminUsersPage adminuserspage;
 	ExcelUtility excelUtility;
+	GeneralUtility generalUtility;
+	PageUtility pageUtility;
 
 	@Test(priority = 1, groups = "smoke")
 	public void Verify_HitAdminUser() {
@@ -34,7 +38,7 @@ public class AdminUsersTest extends Base {
 
 	}
 
-	@Test
+	@Test(groups = "smoke")
 	public void Verify_AddNewAdminUsers() {
 		loginpage = new LoginPage(driver);
 		adminuserspage = new AdminUsersPage(driver);
@@ -76,7 +80,7 @@ public class AdminUsersTest extends Base {
 
 	}
 
-	@Test(dataProvider = "PartnerUsers", dataProviderClass = AdminUsersDataProvider.class)
+	@Test(dataProvider = "PartnerCreationFromAdminPage", dataProviderClass = AdminUsersDataProvider.class)
 	public void Verify_AddNewPartnerUsers(String username, String password) {
 		loginpage = new LoginPage(driver);
 		adminuserspage = new AdminUsersPage(driver);
@@ -84,16 +88,13 @@ public class AdminUsersTest extends Base {
 		loginpage.login();
 		adminuserspage.hitAdminUsers();
 		adminuserspage.clickOnNewButton();
-		excelUtility.setExcelFile("AdminUsers", "newAdminUser");
-		String userName = excelUtility.getCellData(2, 0);
-		String passWord = excelUtility.getCellData(2, 1);
-		adminuserspage.enterUserName(userName);
-		adminuserspage.enterPassword(passWord);
+	    adminuserspage.enterUserName(username);
+		adminuserspage.enterPassword(password);
 		adminuserspage.selectUserType("Partner");
 		adminuserspage.clickSaveButton();
-		String expectedUser = userName;
-		String actualuser = adminuserspage.checkNewAdminUserCreatedOrNot();
-		Assert.assertEquals(actualuser, expectedUser, "New Parter user not created");
+		String expectedUser = username;
+		String actualUser = adminuserspage.checkNewAdminUserCreatedOrNot();
+		Assert.assertEquals(actualUser, expectedUser, "New Parter user not created");
 
 	}
 	
@@ -126,10 +127,10 @@ public class AdminUsersTest extends Base {
 		adminuserspage = new AdminUsersPage(driver);
 		loginpage.login();
 		adminuserspage.hitAdminUsers();
-		adminuserspage.deleteUser("Aparnamerla");
-		
-		
-		
+		adminuserspage.deleteUser("reymondd");
+		pageUtility=new PageUtility(driver);
+		pageUtility.acceptAlert();
+	 
 		
 
 	}

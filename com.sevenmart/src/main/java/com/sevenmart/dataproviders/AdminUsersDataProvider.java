@@ -19,4 +19,10 @@ public class AdminUsersDataProvider {
 		Object data[][] = excelutility.getMultiDimensionalData(2, 2);
 		return data;
 	}
+	@DataProvider(name = "PartnerCreationFromAdminPage")
+	public Object[][] PartnerCreation() {
+		excelutility.setExcelFile("AdminUsers", "partnerCreation");
+		Object data[][] = excelutility.getMultiDimensionalData(2, 2);
+		return data;
+	}
 }

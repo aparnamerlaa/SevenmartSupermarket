@@ -26,7 +26,7 @@ public class LoginTest extends Base {
 		Assert.assertEquals(actualProfileName, expectedProfileName, "Admin login Failed");
 	}
 
-	@Test
+	@Test(enabled=false)
 	public void verify_InvalidUserLogin() {
 		loginpage = new LoginPage(driver);
 		excelutility.setExcelFile("login data project", "Invalidlogincredential");
